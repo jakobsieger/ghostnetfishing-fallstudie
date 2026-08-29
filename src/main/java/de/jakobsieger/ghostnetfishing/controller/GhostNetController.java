@@ -12,15 +12,13 @@ import jakarta.inject.Named;
 @Named
 @ViewScoped
 public class GhostNetController implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private List<GhostNet> ghostNets = new ArrayList<GhostNet>();
-	
-	public List<GhostNet> getGhostNets() {
-		return ghostNets;
-	}
-	
+	private GhostNet newGhostNet = new GhostNet();
+	private boolean reportFormVisible = false;
+
 	public GhostNetController() {
 		GhostNet ghostNetTest1 = new GhostNet();
 		ghostNetTest1.setId(1);
@@ -28,7 +26,32 @@ public class GhostNetController implements Serializable {
 		ghostNetTest1.setLongitude(10.2345);
 		ghostNetTest1.setSize(56.0);
 		ghostNetTest1.setStatus(GhostNetStatus.REPORTED);
-		
+
 		ghostNets.add(ghostNetTest1);
+	}
+
+	public List<GhostNet> getGhostNets() {
+		return ghostNets;
+	}
+
+	public GhostNet getNewGhostNet() {
+		return newGhostNet;
+	}
+
+	public void setNewGhostNet(GhostNet newGhostNet) {
+		this.newGhostNet = newGhostNet;
+	}
+
+	public boolean isReportFormVisible() {
+		return reportFormVisible;
+	}
+
+	public void showReportForm() {
+		reportFormVisible = true;
+	}
+	
+	public void reportNewGhostNet() {
+		newGhostNet = new GhostNet();
+		reportFormVisible = false;
 	}
 }

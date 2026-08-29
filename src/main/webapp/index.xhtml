@@ -1,41 +1,57 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html"
-      xmlns:f="jakarta.faces.core">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core">
 
 <h:head>
-    <title>Ghost Net Fishing</title>
+	<title>Ghost Net Fishing</title>
 </h:head>
 
 <h:body>
-    <h1>Ghost Net Fishing</h1>
+	<h1>Ghost Net Fishing</h1>
 
-    <h:dataTable var="ghostNet" value="#{ghostNetController.ghostNets}">
-    	<h:column>
-    		<f:facet name="header">ID</f:facet>
-    		<h:outputText value="#{ghostNet.id}" />
-    	</h:column>
-    	<h:column>
-    		<f:facet name="header">Größe</f:facet>
-    		<h:outputText value="#{ghostNet.size}" />
-    	</h:column>
-    	<h:column>
-    		<f:facet name="header">Standort</f:facet>
-    		<h:outputText value="#{ghostNet.latitude}, #{ghostNet.longitude}" />
-    	</h:column>
-    	<h:column>
-    		<f:facet name="header">Status</f:facet>
-    		<h:outputText value="#{ghostNet.status}" />
-    	</h:column>
-    	<h:column>
-    		<f:facet name="header">Gemeldet von</f:facet>
-    		<h:outputText value="#{ghostNet.reportedBy}" />
-    	</h:column>
-    	<h:column>
-    		<f:facet name="header">Aktionen</f:facet>
-    		<h:outputText value="-" />
-    	</h:column>
-    </h:dataTable>
+	<h:dataTable var="ghostNet" value="#{ghostNetController.ghostNets}">
+		<h:column>
+			<f:facet name="header">ID</f:facet>
+			<h:outputText value="#{ghostNet.id}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Größe</f:facet>
+			<h:outputText value="#{ghostNet.size}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Standort</f:facet>
+			<h:outputText value="#{ghostNet.latitude}, #{ghostNet.longitude}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Status</f:facet>
+			<h:outputText value="#{ghostNet.status}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Gemeldet von</f:facet>
+			<h:outputText value="#{ghostNet.reportedBy}" />
+		</h:column>
+		<h:column>¸
+			<f:facet name="header">Aktionen</f:facet>
+			<h:outputText value="-" />
+		</h:column>
+	</h:dataTable>
+	<h:form>
+		<h:commandButton value="Geisternetz melden"
+			action="#{ghostNetController.showReportForm}" />
+	</h:form>
+
+	<h:panelGroup rendered="#{ghostNetController.reportFormVisible}">
+		<h:form>
+			<h:outputText value="Längengrad:" />
+			<h:inputText value="#{ghostNetController.newGhostNet.latitude}" />
+			<h:outputText value="Breitengrad:" />
+			<h:inputText value="#{ghostNetController.newGhostNet.longitude}" />
+			<h:outputText value="Größe:" />
+			<h:inputText value="#{ghostNetController.newGhostNet.size}" />
+			<h:commandButton value="Speichern"
+				action="#{ghostNetController.reportNewGhostNet}" />
+		</h:form>
+	</h:panelGroup>
 </h:body>
 
 </html>
