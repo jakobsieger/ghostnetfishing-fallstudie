@@ -1,5 +1,6 @@
 package de.jakobsieger.ghostnetfishing.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,9 @@ import jakarta.inject.Named;
 
 @Named
 @ViewScoped
-public class GhostNetController {
+public class GhostNetController implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private List<GhostNet> ghostNets = new ArrayList<GhostNet>();
 	
