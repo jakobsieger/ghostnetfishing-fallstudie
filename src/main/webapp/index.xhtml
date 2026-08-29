@@ -28,11 +28,11 @@
 		</h:column>
 		<h:column>
 			<f:facet name="header">Gemeldet von</f:facet>
-			<h:outputText value="#{ghostNet.reportedBy}" />
+			<h:outputText value="#{ghostNet.reportedBy.name}" />
 		</h:column>
-		<h:column>¸
+		<h:column>
 			<f:facet name="header">Aktionen</f:facet>
-			<h:outputText value="-" />
+			<h:outputText value="----" />
 		</h:column>
 	</h:dataTable>
 	<h:form>
@@ -48,6 +48,10 @@
 			<h:inputText value="#{ghostNetController.newGhostNet.longitude}" />
 			<h:outputText value="Größe:" />
 			<h:inputText value="#{ghostNetController.newGhostNet.size}" />
+			<h:outputText value="Name der meldenden Person:" />
+			<h:inputText value="#{ghostNetController.newReportingPerson.name}" />
+			<h:outputText value="Telefonnummer der meldenden Person:" />
+			<h:inputText value="#{ghostNetController.newReportingPerson.phone}" />
 			<h:commandButton value="Speichern"
 				action="#{ghostNetController.reportNewGhostNet}" />
 		</h:form>

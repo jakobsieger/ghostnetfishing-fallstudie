@@ -6,6 +6,7 @@ import java.util.List;
 
 import de.jakobsieger.ghostnetfishing.model.GhostNet;
 import de.jakobsieger.ghostnetfishing.model.GhostNetStatus;
+import de.jakobsieger.ghostnetfishing.model.Person;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 
@@ -17,6 +18,7 @@ public class GhostNetController implements Serializable {
 
 	private List<GhostNet> ghostNets = new ArrayList<GhostNet>();
 	private GhostNet newGhostNet = new GhostNet();
+	private Person newReportingPerson = new Person();
 	private boolean reportFormVisible = false;
 
 	public GhostNetController() {
@@ -38,6 +40,14 @@ public class GhostNetController implements Serializable {
 		return newGhostNet;
 	}
 
+	public Person getNewReportingPerson() {
+		return newReportingPerson;
+	}
+
+	public void setNewReportingPerson(Person newReportingPerson) {
+		this.newReportingPerson = newReportingPerson;
+	}
+
 	public void setNewGhostNet(GhostNet newGhostNet) {
 		this.newGhostNet = newGhostNet;
 	}
@@ -49,9 +59,23 @@ public class GhostNetController implements Serializable {
 	public void showReportForm() {
 		reportFormVisible = true;
 	}
-	
+
 	public void reportNewGhostNet() {
+		newGhostNet.setId(ghostNets.size() + 1);
+		newGhostNet.setStatus(GhostNetStatus.REPORTED);
+
+		if (newReportingPerson.getName() == null || newReportingPerson.getName() == ""
+				|| newReportingPerson.getPhone() == null || newReportingPerson.getPhone() == "") {
+			newGhostNet.setReportedBy(null);
+		} else {
+			newReportingPerson.setId(newGhostNet.getId());
+			newGhostNet.setReportedBy(newReportingPerson);
+		}
+
+		ghostNets.add(newGhostNet);
+
 		newGhostNet = new GhostNet();
+		newReportingPerson = new Person();
 		reportFormVisible = false;
 	}
 }
