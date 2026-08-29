@@ -1,6 +1,6 @@
 package de.jakobsieger.ghostnetfishing.model;
 
-enum GhostNetStatus {
+public enum GhostNetStatus {
 	REPORTED,
 	SALVAGE_REGISTERED,
 	SALVAGED,
