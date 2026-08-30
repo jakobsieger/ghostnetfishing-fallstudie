@@ -21,6 +21,10 @@ public class GhostNetController implements Serializable {
 	private Person newReportingPerson = new Person();
 	private boolean reportFormVisible = false;
 
+	private GhostNet selectedGhostNet;
+	private Person newSalvagingPerson = new Person();
+	private boolean salvageFormVisible = false;
+
 	public GhostNetController() {
 		GhostNet ghostNetTest1 = new GhostNet();
 		ghostNetTest1.setId(1);
@@ -40,6 +44,10 @@ public class GhostNetController implements Serializable {
 		return newGhostNet;
 	}
 
+	public void setNewGhostNet(GhostNet newGhostNet) {
+		this.newGhostNet = newGhostNet;
+	}
+
 	public Person getNewReportingPerson() {
 		return newReportingPerson;
 	}
@@ -48,13 +56,23 @@ public class GhostNetController implements Serializable {
 		this.newReportingPerson = newReportingPerson;
 	}
 
-	public void setNewGhostNet(GhostNet newGhostNet) {
-		this.newGhostNet = newGhostNet;
-	}
-
 	public boolean isReportFormVisible() {
 		return reportFormVisible;
 	}
+
+	public GhostNet getSelectedGhostNet() {
+		return selectedGhostNet;
+	}
+
+	public Person getNewSalvagingPerson() {
+		return newSalvagingPerson;
+	}
+
+	public boolean isSalvageFormVisible() {
+		return salvageFormVisible;
+	}
+
+	// report form
 
 	public void showReportForm() {
 		reportFormVisible = true;
@@ -77,5 +95,23 @@ public class GhostNetController implements Serializable {
 		newGhostNet = new GhostNet();
 		newReportingPerson = new Person();
 		reportFormVisible = false;
+	}
+
+	// salvage form
+
+	public void showSalvageForm(GhostNet ghostNet) {
+		salvageFormVisible = true;
+		selectedGhostNet = ghostNet;
+	}
+
+	public void registerSalvaging() {
+		newSalvagingPerson.setId(123);
+		selectedGhostNet.setSalvageRegisteredBy(newSalvagingPerson);
+		selectedGhostNet.setStatus(GhostNetStatus.SALVAGE_REGISTERED);
+
+		selectedGhostNet = null;
+		newSalvagingPerson = new Person();
+
+		salvageFormVisible = false;
 	}
 }

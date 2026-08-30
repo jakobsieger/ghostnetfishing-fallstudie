@@ -32,7 +32,10 @@
 		</h:column>
 		<h:column>
 			<f:facet name="header">Aktionen</f:facet>
-			<h:outputText value="----" />
+			<h:form>
+				<h:commandButton value="Bergung anmelden"
+					action="#{ghostNetController.showSalvageForm(ghostNet)}" />
+			</h:form>
 		</h:column>
 	</h:dataTable>
 	<h:form>
@@ -52,8 +55,21 @@
 			<h:inputText value="#{ghostNetController.newReportingPerson.name}" />
 			<h:outputText value="Telefonnummer der meldenden Person:" />
 			<h:inputText value="#{ghostNetController.newReportingPerson.phone}" />
-			<h:commandButton value="Speichern"
+			<h:commandButton value="Geisternetz speichern"
 				action="#{ghostNetController.reportNewGhostNet}" />
+		</h:form>
+	</h:panelGroup>
+
+	<h:panelGroup rendered="#{ghostNetController.salvageFormVisible}">
+		<h:form>
+			<h:outputText
+				value="Ausgewähltes Geisternetz: #{ghostNetController.selectedGhostNet.id}" />
+			<h:outputText value="Name der bergenden Person:" />
+			<h:inputText value="#{ghostNetController.newSalvagingPerson.name}" />
+			<h:outputText value="Telefonnummer der bergenden Person:" />
+			<h:inputText value="#{ghostNetController.newSalvagingPerson.phone}" />
+			<h:commandButton value="Bergung speichern"
+				action="#{ghostNetController.registerSalvaging}" />
 		</h:form>
 	</h:panelGroup>
 </h:body>
