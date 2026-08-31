@@ -34,8 +34,11 @@
 			<f:facet name="header">Aktionen</f:facet>
 			<h:form>
 				<h:commandButton value="Bergung anmelden"
-					action="#{ghostNetController.showSalvageForm(ghostNet)}"
+					action="#{ghostNetController.showSalvagingForm(ghostNet)}"
 					rendered="#{ghostNet.status == 'REPORTED'}" />
+				<h:commandButton value="Geborgen melden"
+					action="#{ghostNetController.showSalvagedForm(ghostNet)}"
+					rendered="#{ghostNet.status == 'SALVAGE_REGISTERED'}" />
 			</h:form>
 		</h:column>
 	</h:dataTable>
@@ -61,7 +64,7 @@
 		</h:form>
 	</h:panelGroup>
 
-	<h:panelGroup rendered="#{ghostNetController.salvageFormVisible}">
+	<h:panelGroup rendered="#{ghostNetController.salvagingFormVisible}">
 		<h:form>
 			<h:outputText
 				value="Ausgewähltes Geisternetz: #{ghostNetController.selectedGhostNet.id}" />
@@ -81,6 +84,30 @@
 			</h:panelGroup>
 			<h:commandButton value="Bergung speichern"
 				action="#{ghostNetController.registerSalvaging}" />
+		</h:form>
+	</h:panelGroup>
+
+	<h:panelGroup rendered="#{ghostNetController.salvagedFormVisible}">
+		<h:form>
+			<h:outputText
+				value="Ausgewähltes Geisternetz: #{ghostNetController.selectedGhostNet.id}" />
+			<h:outputText value="Name der bergenden Person:" />
+			<h:panelGroup>
+				<h:inputText id="salvageName" required="true"
+					requiredMessage="Name erforderlich"
+					value="#{ghostNetController.newSalvagingPerson.name}" />
+				<h:message for="salvageName" style="color: red;" />
+			</h:panelGroup>
+			<h:outputText value="Telefonnummer der bergenden Person:" />
+			<h:panelGroup>
+				<h:inputText id="salvagePhone" required="true"
+					requiredMessage="Telefonnummer erforderlich"
+					value="#{ghostNetController.newSalvagingPerson.phone}" />
+				<h:message for="salvagePhone" style="color: red;" />
+			</h:panelGroup>
+			<h:commandButton value="Bergung speichern"
+				action="#{ghostNetController.reportAsSalvaged}" />
+			<h:message id="salvagedFormMessages" style="color: red;" />
 		</h:form>
 	</h:panelGroup>
 </h:body>

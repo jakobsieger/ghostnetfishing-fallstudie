@@ -7,6 +7,8 @@ import java.util.List;
 import de.jakobsieger.ghostnetfishing.model.GhostNet;
 import de.jakobsieger.ghostnetfishing.model.GhostNetStatus;
 import de.jakobsieger.ghostnetfishing.model.Person;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 
@@ -23,7 +25,8 @@ public class GhostNetController implements Serializable {
 
 	private GhostNet selectedGhostNet;
 	private Person newSalvagingPerson = new Person();
-	private boolean salvageFormVisible = false;
+	private boolean salvagingFormVisible = false;
+	private boolean salvagedFormVisible = false;
 
 	public GhostNetController() {
 		GhostNet ghostNetTest1 = new GhostNet();
@@ -68,8 +71,12 @@ public class GhostNetController implements Serializable {
 		return newSalvagingPerson;
 	}
 
-	public boolean isSalvageFormVisible() {
-		return salvageFormVisible;
+	public boolean isSalvagingFormVisible() {
+		return salvagingFormVisible;
+	}
+
+	public boolean isSalvagedFormVisible() {
+		return salvagedFormVisible;
 	}
 
 	// report form
@@ -97,10 +104,10 @@ public class GhostNetController implements Serializable {
 		reportFormVisible = false;
 	}
 
-	// salvage form
+	// salvaging form
 
-	public void showSalvageForm(GhostNet ghostNet) {
-		salvageFormVisible = true;
+	public void showSalvagingForm(GhostNet ghostNet) {
+		salvagingFormVisible = true;
 		selectedGhostNet = ghostNet;
 	}
 
@@ -112,6 +119,29 @@ public class GhostNetController implements Serializable {
 		selectedGhostNet = null;
 		newSalvagingPerson = new Person();
 
-		salvageFormVisible = false;
+		salvagingFormVisible = false;
+	}
+
+	// salvaged form
+
+	public void showSalvagedForm(GhostNet ghostNet) {
+		salvagedFormVisible = true;
+		selectedGhostNet = ghostNet;
+	}
+
+	public void reportAsSalvaged() {
+		// check if salvaging person is the one who registered the salvage
+		newSalvagingPerson.setId(123);
+		Person salvageRegisteredBy = selectedGhostNet.getSalvageRegisteredBy();
+
+		if (newSalvagingPerson.getName().equals(salvageRegisteredBy.getName())
+				&& newSalvagingPerson.getPhone().equals(salvageRegisteredBy.getPhone())) {
+			selectedGhostNet.setStatus(GhostNetStatus.SALVAGED);
+			newSalvagingPerson = new Person();
+			salvagedFormVisible = false;
+		} else {
+			FacesContext.getCurrentInstance().addMessage("salvagedFormMessages", new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Personendaten müssen mit Anmeldung übereinstimmen", null));
+		}
 	}
 }
