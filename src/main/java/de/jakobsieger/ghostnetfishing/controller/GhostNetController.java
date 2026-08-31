@@ -24,7 +24,6 @@ public class GhostNetController implements Serializable {
 	private boolean reportFormVisible = false;
 
 	private GhostNet selectedGhostNet;
-//	private Person newSalvagingPerson = new Person();
 	private boolean salvagingFormVisible = false;
 	private boolean salvagedFormVisible = false;
 	private boolean lostFormVisible = false;
@@ -67,10 +66,6 @@ public class GhostNetController implements Serializable {
 	public GhostNet getSelectedGhostNet() {
 		return selectedGhostNet;
 	}
-
-//	public Person getNewSalvagingPerson() {
-//		return newSalvagingPerson;
-//	}
 
 	public boolean isSalvagingFormVisible() {
 		return salvagingFormVisible;
