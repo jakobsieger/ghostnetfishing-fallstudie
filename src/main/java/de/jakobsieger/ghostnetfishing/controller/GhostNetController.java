@@ -130,7 +130,6 @@ public class GhostNetController implements Serializable {
 	}
 
 	public void reportAsSalvaged() {
-		// check if salvaging person is the one who registered the salvage
 		newSalvagingPerson.setId(123);
 		Person salvageRegisteredBy = selectedGhostNet.getSalvageRegisteredBy();
 
