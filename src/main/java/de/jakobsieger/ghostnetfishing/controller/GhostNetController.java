@@ -24,9 +24,10 @@ public class GhostNetController implements Serializable {
 	private boolean reportFormVisible = false;
 
 	private GhostNet selectedGhostNet;
-	private Person newSalvagingPerson = new Person();
+//	private Person newSalvagingPerson = new Person();
 	private boolean salvagingFormVisible = false;
 	private boolean salvagedFormVisible = false;
+	private boolean lostFormVisible = false;
 
 	public GhostNetController() {
 		GhostNet ghostNetTest1 = new GhostNet();
@@ -67,9 +68,9 @@ public class GhostNetController implements Serializable {
 		return selectedGhostNet;
 	}
 
-	public Person getNewSalvagingPerson() {
-		return newSalvagingPerson;
-	}
+//	public Person getNewSalvagingPerson() {
+//		return newSalvagingPerson;
+//	}
 
 	public boolean isSalvagingFormVisible() {
 		return salvagingFormVisible;
@@ -77,6 +78,10 @@ public class GhostNetController implements Serializable {
 
 	public boolean isSalvagedFormVisible() {
 		return salvagedFormVisible;
+	}
+	
+	public boolean isLostFormVisible() {
+		return lostFormVisible;
 	}
 
 	// report form
@@ -112,12 +117,12 @@ public class GhostNetController implements Serializable {
 	}
 
 	public void registerSalvaging() {
-		newSalvagingPerson.setId(123);
-		selectedGhostNet.setSalvageRegisteredBy(newSalvagingPerson);
+		newReportingPerson.setId(123);
+		selectedGhostNet.setSalvageRegisteredBy(newReportingPerson);
 		selectedGhostNet.setStatus(GhostNetStatus.SALVAGE_REGISTERED);
 
 		selectedGhostNet = null;
-		newSalvagingPerson = new Person();
+		newReportingPerson = new Person();
 
 		salvagingFormVisible = false;
 	}
@@ -130,17 +135,34 @@ public class GhostNetController implements Serializable {
 	}
 
 	public void reportAsSalvaged() {
-		newSalvagingPerson.setId(123);
+		newReportingPerson.setId(123);
 		Person salvageRegisteredBy = selectedGhostNet.getSalvageRegisteredBy();
 
-		if (newSalvagingPerson.getName().equals(salvageRegisteredBy.getName())
-				&& newSalvagingPerson.getPhone().equals(salvageRegisteredBy.getPhone())) {
+		if (newReportingPerson.getName().equals(salvageRegisteredBy.getName())
+				&& newReportingPerson.getPhone().equals(salvageRegisteredBy.getPhone())) {
 			selectedGhostNet.setStatus(GhostNetStatus.SALVAGED);
-			newSalvagingPerson = new Person();
+			newReportingPerson = new Person();
 			salvagedFormVisible = false;
 		} else {
 			FacesContext.getCurrentInstance().addMessage("salvagedFormMessages", new FacesMessage(
 					FacesMessage.SEVERITY_ERROR, "Personendaten müssen mit Anmeldung übereinstimmen", null));
 		}
+	}
+	
+	// lost form
+	
+	public void showLostForm(GhostNet ghostNet) {
+		lostFormVisible = true;
+		selectedGhostNet = ghostNet;
+	}
+	
+	public void reportAsLost() {
+		newReportingPerson.setId(123);
+		selectedGhostNet.setStatus(GhostNetStatus.LOST);
+		
+		selectedGhostNet = null;
+		newReportingPerson = new Person();
+		
+		lostFormVisible = false;
 	}
 }
