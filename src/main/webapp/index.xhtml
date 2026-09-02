@@ -59,9 +59,9 @@
 			<h:outputText value="Größe:" />
 			<h:inputText value="#{ghostNetController.newGhostNet.size}" />
 			<h:outputText value="Name der meldenden Person:" />
-			<h:inputText value="#{ghostNetController.newReportingPerson.name}" />
+			<h:inputText value="#{ghostNetController.formPerson.name}" />
 			<h:outputText value="Telefonnummer der meldenden Person:" />
-			<h:inputText value="#{ghostNetController.newReportingPerson.phone}" />
+			<h:inputText value="#{ghostNetController.formPerson.phone}" />
 			<h:commandButton value="Geisternetz speichern"
 				action="#{ghostNetController.reportNewGhostNet}" />
 		</h:form>
@@ -75,14 +75,14 @@
 			<h:panelGroup>
 				<h:inputText id="salvageName" required="true"
 					requiredMessage="Name erforderlich"
-					value="#{ghostNetController.newReportingPerson.name}" />
+					value="#{ghostNetController.formPerson.name}" />
 				<h:message for="salvageName" style="color: red;" />
 			</h:panelGroup>
 			<h:outputText value="Telefonnummer der bergenden Person:" />
 			<h:panelGroup>
 				<h:inputText id="salvagePhone" required="true"
 					requiredMessage="Telefonnummer erforderlich"
-					value="#{ghostNetController.newReportingPerson.phone}" />
+					value="#{ghostNetController.formPerson.phone}" />
 				<h:message for="salvagePhone" style="color: red;" />
 			</h:panelGroup>
 			<h:commandButton value="Bergung speichern"  
@@ -98,14 +98,14 @@
 			<h:panelGroup>
 				<h:inputText id="salvageName" required="true"
 					requiredMessage="Name erforderlich"
-					value="#{ghostNetController.newReportingPerson.name}" />
+					value="#{ghostNetController.formPerson.name}" />
 				<h:message for="salvageName" style="color: red;" />
 			</h:panelGroup>
 			<h:outputText value="Telefonnummer der bergenden Person:" />
 			<h:panelGroup>
 				<h:inputText id="salvagePhone" required="true"
 					requiredMessage="Telefonnummer erforderlich"
-					value="#{ghostNetController.newReportingPerson.phone}" />
+					value="#{ghostNetController.formPerson.phone}" />
 				<h:message for="salvagePhone" style="color: red;" />
 			</h:panelGroup>
 			<h:commandButton value="Bergung durchführen"
@@ -122,14 +122,14 @@
 			<h:panelGroup>
 				<h:inputText id="lostName" required="true"
 					requiredMessage="Name erforderlich"
-					value="#{ghostNetController.newReportingPerson.name}" />
+					value="#{ghostNetController.formPerson.name}" />
 				<h:message for="lostName" style="color: red;" />
 			</h:panelGroup>
 			<h:outputText value="Telefonnummer der bergenden Person:" />
 			<h:panelGroup>
 				<h:inputText id="lostPhone" required="true"
 					requiredMessage="Telefonnummer erforderlich"
-					value="#{ghostNetController.newReportingPerson.phone}" />
+					value="#{ghostNetController.formPerson.phone}" />
 				<h:message for="lostPhone" style="color: red;" />
 			</h:panelGroup>
 			<h:commandButton value="Verschollen melden"

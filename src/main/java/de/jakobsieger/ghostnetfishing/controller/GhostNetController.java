@@ -20,7 +20,7 @@ public class GhostNetController implements Serializable {
 
 	private List<GhostNet> ghostNets = new ArrayList<GhostNet>();
 	private GhostNet newGhostNet = new GhostNet();
-	private Person newReportingPerson = new Person();
+	private Person formPerson = new Person();
 	private boolean reportFormVisible = false;
 
 	private GhostNet selectedGhostNet;
@@ -51,12 +51,12 @@ public class GhostNetController implements Serializable {
 		this.newGhostNet = newGhostNet;
 	}
 
-	public Person getNewReportingPerson() {
-		return newReportingPerson;
+	public Person getFormPerson() {
+		return formPerson;
 	}
 
-	public void setNewReportingPerson(Person newReportingPerson) {
-		this.newReportingPerson = newReportingPerson;
+	public void setNewReportingPerson(Person newFormPerson) {
+		this.formPerson = newFormPerson;
 	}
 
 	public boolean isReportFormVisible() {
@@ -89,18 +89,18 @@ public class GhostNetController implements Serializable {
 		newGhostNet.setId(ghostNets.size() + 1);
 		newGhostNet.setStatus(GhostNetStatus.REPORTED);
 
-		if (newReportingPerson.getName() == null || newReportingPerson.getName() == ""
-				|| newReportingPerson.getPhone() == null || newReportingPerson.getPhone() == "") {
+		if (formPerson.getName().equals(null) || formPerson.getName().isBlank()
+				|| formPerson.getPhone().equals(null) || formPerson.getPhone().isBlank()) {
 			newGhostNet.setReportedBy(null);
 		} else {
-			newReportingPerson.setId(newGhostNet.getId());
-			newGhostNet.setReportedBy(newReportingPerson);
+			formPerson.setId(newGhostNet.getId());
+			newGhostNet.setReportedBy(formPerson);
 		}
 
 		ghostNets.add(newGhostNet);
 
 		newGhostNet = new GhostNet();
-		newReportingPerson = new Person();
+		formPerson = new Person();
 		reportFormVisible = false;
 	}
 
@@ -112,12 +112,12 @@ public class GhostNetController implements Serializable {
 	}
 
 	public void registerSalvaging() {
-		newReportingPerson.setId(123);
-		selectedGhostNet.setSalvageRegisteredBy(newReportingPerson);
+		formPerson.setId(123);
+		selectedGhostNet.setSalvageRegisteredBy(formPerson);
 		selectedGhostNet.setStatus(GhostNetStatus.SALVAGE_REGISTERED);
 
 		selectedGhostNet = null;
-		newReportingPerson = new Person();
+		formPerson = new Person();
 
 		salvagingFormVisible = false;
 	}
@@ -130,13 +130,13 @@ public class GhostNetController implements Serializable {
 	}
 
 	public void reportAsSalvaged() {
-		newReportingPerson.setId(123);
+		formPerson.setId(123);
 		Person salvageRegisteredBy = selectedGhostNet.getSalvageRegisteredBy();
 
-		if (newReportingPerson.getName().equals(salvageRegisteredBy.getName())
-				&& newReportingPerson.getPhone().equals(salvageRegisteredBy.getPhone())) {
+		if (formPerson.getName().equals(salvageRegisteredBy.getName())
+				&& formPerson.getPhone().equals(salvageRegisteredBy.getPhone())) {
 			selectedGhostNet.setStatus(GhostNetStatus.SALVAGED);
-			newReportingPerson = new Person();
+			formPerson = new Person();
 			salvagedFormVisible = false;
 		} else {
 			FacesContext.getCurrentInstance().addMessage("salvagedFormMessages", new FacesMessage(
@@ -152,11 +152,11 @@ public class GhostNetController implements Serializable {
 	}
 	
 	public void reportAsLost() {
-		newReportingPerson.setId(123);
+		formPerson.setId(123);
 		selectedGhostNet.setStatus(GhostNetStatus.LOST);
 		
 		selectedGhostNet = null;
-		newReportingPerson = new Person();
+		formPerson = new Person();
 		
 		lostFormVisible = false;
 	}
