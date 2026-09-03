@@ -1,7 +1,11 @@
 package de.jakobsieger.ghostnetfishing.model;
 
-public class GhostNet {
+import java.io.Serializable;
 
+public class GhostNet implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private double latitude;
 	private double longitude;
