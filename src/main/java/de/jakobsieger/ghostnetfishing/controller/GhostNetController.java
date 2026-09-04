@@ -21,7 +21,6 @@ public class GhostNetController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private GhostNetDAO ghostNetDAO = new GhostNetDAO();
-	private PersonDAO personDAO = new PersonDAO();
 
 	private List<GhostNet> ghostNets = new ArrayList<GhostNet>();
 	private GhostNet newGhostNet = new GhostNet();
