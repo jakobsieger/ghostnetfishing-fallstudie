@@ -30,7 +30,7 @@ public class GhostNet implements Serializable {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Person reportedBy;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private Person salvageRegisteredBy;
 
 	public GhostNet() {

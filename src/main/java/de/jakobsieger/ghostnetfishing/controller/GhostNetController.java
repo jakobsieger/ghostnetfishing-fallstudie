@@ -108,10 +108,11 @@ public class GhostNetController implements Serializable {
 	}
 
 	public void registerSalvaging() {
-		formPerson.setId(123);
 		selectedGhostNet.setSalvageRegisteredBy(formPerson);
 		selectedGhostNet.setStatus(GhostNetStatus.SALVAGE_REGISTERED);
-
+		
+		ghostNetDAO.update(selectedGhostNet);
+		
 		selectedGhostNet = null;
 		formPerson = new Person();
 

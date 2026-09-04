@@ -17,6 +17,14 @@ public class GhostNetDAO {
 		factory = Persistence.createEntityManagerFactory("GhostNetFishingPersistenceUnit");
 	}
 	
+	public List<GhostNet> findAll() {
+		EntityManager manager = factory.createEntityManager();
+		Query query = manager.createQuery("SELECT a FROM GhostNet a");
+		List<GhostNet> allGhostNets = query.getResultList();
+		manager.close();
+		return allGhostNets;
+	}
+	
 	public void save(GhostNet ghostNet) {
 		EntityManager manager = factory.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
@@ -28,11 +36,14 @@ public class GhostNetDAO {
 		manager.close();
 	}
 	
-	public List<GhostNet> findAll() {
+	public void update(GhostNet ghostNet) {
 		EntityManager manager = factory.createEntityManager();
-		Query query = manager.createQuery("SELECT a FROM GhostNet a");
-		List<GhostNet> allGhostNets = query.getResultList();
+		EntityTransaction transaction = manager.getTransaction();
+		
+		transaction.begin();
+		manager.merge(ghostNet);
+		transaction.commit();
+		
 		manager.close();
-		return allGhostNets;
 	}
 }
