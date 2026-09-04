@@ -2,6 +2,7 @@ package de.jakobsieger.ghostnetfishing.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -26,10 +27,10 @@ public class GhostNet implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private GhostNetStatus status;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Person reportedBy;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Person salvageRegisteredBy;
 
 	public GhostNet() {

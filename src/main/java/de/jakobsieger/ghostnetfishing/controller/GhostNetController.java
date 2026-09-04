@@ -19,7 +19,7 @@ import jakarta.inject.Named;
 public class GhostNetController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private GhostNetDAO ghostNetDAO = new GhostNetDAO();
 	private PersonDAO personDAO = new PersonDAO();
 
@@ -72,7 +72,7 @@ public class GhostNetController implements Serializable {
 	public boolean isSalvagedFormVisible() {
 		return salvagedFormVisible;
 	}
-	
+
 	public boolean isLostFormVisible() {
 		return lostFormVisible;
 	}
@@ -85,11 +85,10 @@ public class GhostNetController implements Serializable {
 
 	public void reportNewGhostNet() {
 
-		if (formPerson.getName().equals(null) || formPerson.getName().isBlank()
-				|| formPerson.getPhone().equals(null) || formPerson.getPhone().isBlank()) {
+		if (formPerson.getName().equals(null) || formPerson.getName().isBlank() || formPerson.getPhone().equals(null)
+				|| formPerson.getPhone().isBlank()) {
 			newGhostNet.setReportedBy(null);
 		} else {
-			personDAO.save(formPerson);
 			newGhostNet.setReportedBy(formPerson);
 		}
 		newGhostNet.setStatus(GhostNetStatus.REPORTED);
@@ -139,21 +138,21 @@ public class GhostNetController implements Serializable {
 					FacesMessage.SEVERITY_ERROR, "Personendaten müssen mit Anmeldung übereinstimmen", null));
 		}
 	}
-	
+
 	// lost form
-	
+
 	public void showLostForm(GhostNet ghostNet) {
 		lostFormVisible = true;
 		selectedGhostNet = ghostNet;
 	}
-	
+
 	public void reportAsLost() {
 		formPerson.setId(123);
 		selectedGhostNet.setStatus(GhostNetStatus.LOST);
-		
+
 		selectedGhostNet = null;
 		formPerson = new Person();
-		
+
 		lostFormVisible = false;
 	}
 }
