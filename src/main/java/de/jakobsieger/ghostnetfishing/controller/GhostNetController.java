@@ -93,6 +93,7 @@ public class GhostNetController implements Serializable {
 		}
 		newGhostNet.setStatus(GhostNetStatus.REPORTED);
 		ghostNetDAO.save(newGhostNet);
+		ghostNets = ghostNetDAO.findAll();
 
 		newGhostNet = new GhostNet();
 		formPerson = new Person();
