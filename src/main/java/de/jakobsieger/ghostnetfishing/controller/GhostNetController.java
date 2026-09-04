@@ -110,9 +110,9 @@ public class GhostNetController implements Serializable {
 	public void registerSalvaging() {
 		selectedGhostNet.setSalvageRegisteredBy(formPerson);
 		selectedGhostNet.setStatus(GhostNetStatus.SALVAGE_REGISTERED);
-		
+
 		ghostNetDAO.update(selectedGhostNet);
-		
+
 		selectedGhostNet = null;
 		formPerson = new Person();
 
@@ -127,12 +127,12 @@ public class GhostNetController implements Serializable {
 	}
 
 	public void reportAsSalvaged() {
-		formPerson.setId(123);
 		Person salvageRegisteredBy = selectedGhostNet.getSalvageRegisteredBy();
 
 		if (formPerson.getName().equals(salvageRegisteredBy.getName())
 				&& formPerson.getPhone().equals(salvageRegisteredBy.getPhone())) {
 			selectedGhostNet.setStatus(GhostNetStatus.SALVAGED);
+			ghostNetDAO.update(selectedGhostNet);
 			formPerson = new Person();
 			salvagedFormVisible = false;
 		} else {
