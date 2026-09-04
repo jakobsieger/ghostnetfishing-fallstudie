@@ -2,37 +2,37 @@ package de.jakobsieger.ghostnetfishing.dao;
 
 import java.util.List;
 
-import de.jakobsieger.ghostnetfishing.model.GhostNet;
+import de.jakobsieger.ghostnetfishing.model.Person;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 
-public class GhostNetDAO {
-	
+public class PersonDAO {
+
 	private EntityManagerFactory factory;
-	
-	public GhostNetDAO() {
+
+	public PersonDAO() {
 		factory = Persistence.createEntityManagerFactory("GhostNetFishingPersistenceUnit");
 	}
-	
-	public void save(GhostNet ghostNet) {
+
+	public void save(Person person) {
 		EntityManager manager = factory.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
-		
+
 		transaction.begin();
-		manager.persist(ghostNet);
+		manager.persist(person);
 		transaction.commit();
-		
+
 		manager.close();
 	}
-	
-	public List<GhostNet> findAll() {
+
+	public List<Person> findAll() {
 		EntityManager manager = factory.createEntityManager();
-		Query query = manager.createQuery("SELECT a FROM GhostNet a");
-		List<GhostNet> allGhostNets = query.getResultList();
+		Query query = manager.createQuery("SELECT a FROM Person a");
+		List<Person> allPersons = query.getResultList();
 		manager.close();
-		return allGhostNets;
+		return allPersons;
 	}
 }
