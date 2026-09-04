@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.jakobsieger.ghostnetfishing.dao.GhostNetDAO;
-import de.jakobsieger.ghostnetfishing.dao.PersonDAO;
 import de.jakobsieger.ghostnetfishing.model.GhostNet;
 import de.jakobsieger.ghostnetfishing.model.GhostNetStatus;
 import de.jakobsieger.ghostnetfishing.model.Person;
