@@ -118,14 +118,14 @@
 		<h:form>
 			<h:outputText
 				value="Ausgewähltes Geisternetz: #{ghostNetController.selectedGhostNet.id}" />
-			<h:outputText value="Name der bergenden Person:" />
+			<h:outputText value="Name der meldenden Person:" />
 			<h:panelGroup>
 				<h:inputText id="lostName" required="true"
 					requiredMessage="Name erforderlich"
 					value="#{ghostNetController.formPerson.name}" />
 				<h:message for="lostName" style="color: red;" />
 			</h:panelGroup>
-			<h:outputText value="Telefonnummer der bergenden Person:" />
+			<h:outputText value="Telefonnummer der meldenden Person:" />
 			<h:panelGroup>
 				<h:inputText id="lostPhone" required="true"
 					requiredMessage="Telefonnummer erforderlich"

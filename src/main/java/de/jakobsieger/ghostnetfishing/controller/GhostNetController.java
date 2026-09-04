@@ -149,9 +149,9 @@ public class GhostNetController implements Serializable {
 	}
 
 	public void reportAsLost() {
-		formPerson.setId(123);
 		selectedGhostNet.setStatus(GhostNetStatus.LOST);
-
+		ghostNetDAO.update(selectedGhostNet);
+		
 		selectedGhostNet = null;
 		formPerson = new Person();
 
