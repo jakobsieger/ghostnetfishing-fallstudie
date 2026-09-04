@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.jakobsieger.ghostnetfishing.dao.GhostNetDAO;
 import de.jakobsieger.ghostnetfishing.model.GhostNet;
 import de.jakobsieger.ghostnetfishing.model.GhostNetStatus;
 import de.jakobsieger.ghostnetfishing.model.Person;
@@ -17,6 +18,8 @@ import jakarta.inject.Named;
 public class GhostNetController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	private GhostNetDAO ghostNetDao = new GhostNetDAO();
 
 	private List<GhostNet> ghostNets = new ArrayList<GhostNet>();
 	private GhostNet newGhostNet = new GhostNet();
@@ -37,6 +40,8 @@ public class GhostNetController implements Serializable {
 		ghostNetTest1.setStatus(GhostNetStatus.REPORTED);
 
 		ghostNets.add(ghostNetTest1);
+		
+		System.out.println(ghostNetDao.findAll());
 	}
 
 	public List<GhostNet> getGhostNets() {

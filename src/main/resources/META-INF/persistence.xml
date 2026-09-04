@@ -12,6 +12,9 @@
 		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl
 		</provider>
 
+		<class>de.jakobsieger.ghostnetfishing.model.GhostNet</class>
+		<class>de.jakobsieger.ghostnetfishing.model.Person</class>
+
 		<properties>
 			<property name="jakarta.persistence.jdbc.driver"
 				value="org.hsqldb.jdbc.JDBCDriver" />
@@ -21,6 +24,10 @@
 				value="fisherman" />
 			<property name="jakarta.persistence.jdbc.password"
 				value="gh0stN3t" />
+			<property name="openjpa.jdbc.SynchronizeMappings"
+				value="buildSchema(ForeignKeys=true)" />
+			<property name="openjpa.RuntimeUnenhancedClasses"
+				value="supported" />
 		</properties>
 	</persistence-unit>
 
