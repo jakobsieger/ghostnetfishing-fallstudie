@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.jakobsieger.ghostnetfishing.dao.GhostNetDAO;
+import de.jakobsieger.ghostnetfishing.dao.PersonDAO;
 import de.jakobsieger.ghostnetfishing.model.GhostNet;
 import de.jakobsieger.ghostnetfishing.model.GhostNetStatus;
 import de.jakobsieger.ghostnetfishing.model.Person;
@@ -20,6 +21,7 @@ public class GhostNetController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private GhostNetDAO ghostNetDAO = new GhostNetDAO();
+	private PersonDAO personDAO = new PersonDAO();
 
 	private List<GhostNet> ghostNets = new ArrayList<GhostNet>();
 	private GhostNet newGhostNet = new GhostNet();
@@ -87,7 +89,8 @@ public class GhostNetController implements Serializable {
 				|| formPerson.getPhone().isBlank()) {
 			newGhostNet.setReportedBy(null);
 		} else {
-			newGhostNet.setReportedBy(formPerson);
+			Person existingPerson = personDAO.findByNameAndPhone(formPerson.getName(), formPerson.getPhone());
+			newGhostNet.setReportedBy(existingPerson != null ? existingPerson : formPerson);
 		}
 		newGhostNet.setStatus(GhostNetStatus.REPORTED);
 		ghostNetDAO.save(newGhostNet);
@@ -106,10 +109,12 @@ public class GhostNetController implements Serializable {
 	}
 
 	public void registerSalvaging() {
-		selectedGhostNet.setSalvageRegisteredBy(formPerson);
+		Person existingPerson = personDAO.findByNameAndPhone(formPerson.getName(), formPerson.getPhone());
+		selectedGhostNet.setSalvageRegisteredBy(existingPerson != null ? existingPerson : formPerson);
 		selectedGhostNet.setStatus(GhostNetStatus.SALVAGE_REGISTERED);
 
 		ghostNetDAO.update(selectedGhostNet);
+		ghostNets = ghostNetDAO.findAll();
 
 		selectedGhostNet = null;
 		formPerson = new Person();
@@ -149,7 +154,7 @@ public class GhostNetController implements Serializable {
 	public void reportAsLost() {
 		selectedGhostNet.setStatus(GhostNetStatus.LOST);
 		ghostNetDAO.update(selectedGhostNet);
-		
+
 		selectedGhostNet = null;
 		formPerson = new Person();
 
