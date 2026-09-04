@@ -34,16 +34,7 @@ public class GhostNetController implements Serializable {
 	private boolean lostFormVisible = false;
 
 	public GhostNetController() {
-		GhostNet ghostNetTest1 = new GhostNet();
-		ghostNetTest1.setId(1);
-		ghostNetTest1.setLatitude(55.2345);
-		ghostNetTest1.setLongitude(10.2345);
-		ghostNetTest1.setSize(56.0);
-		ghostNetTest1.setStatus(GhostNetStatus.REPORTED);
-
-		ghostNets.add(ghostNetTest1);
-		
-		System.out.println(ghostNetDAO.findAll());
+		ghostNets = ghostNetDAO.findAll();
 	}
 
 	public List<GhostNet> getGhostNets() {
