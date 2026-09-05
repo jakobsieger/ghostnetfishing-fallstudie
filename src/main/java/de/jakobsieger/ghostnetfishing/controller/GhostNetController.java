@@ -26,9 +26,9 @@ public class GhostNetController implements Serializable {
 	private List<GhostNet> ghostNets = new ArrayList<GhostNet>();
 	private GhostNet newGhostNet = new GhostNet();
 	private Person formPerson = new Person();
-	private boolean reportFormVisible = false;
-
 	private GhostNet selectedGhostNet;
+	
+	private boolean reportFormVisible = false;
 	private boolean salvagingFormVisible = false;
 	private boolean salvagedFormVisible = false;
 	private boolean lostFormVisible = false;
