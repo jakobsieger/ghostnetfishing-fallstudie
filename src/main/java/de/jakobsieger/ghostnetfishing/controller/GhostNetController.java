@@ -113,7 +113,6 @@ public class GhostNetController implements Serializable {
 	// report form
 
 	public void showReportForm() {
-		// reportFormVisible = true;
 		changeFormVisibility(FormVisibility.REPORT_FORM);
 	}
 
@@ -132,14 +131,12 @@ public class GhostNetController implements Serializable {
 
 		newGhostNet = new GhostNet();
 		formPerson = new Person();
-		// reportFormVisible = false;
 		changeFormVisibility(FormVisibility.NONE);
 	}
 
 	// salvaging form
 
 	public void showSalvagingForm(GhostNet ghostNet) {
-		// salvagingFormVisible = true;
 		changeFormVisibility(FormVisibility.SALVAGING_FORM);
 		selectedGhostNet = ghostNet;
 	}
@@ -155,14 +152,12 @@ public class GhostNetController implements Serializable {
 		selectedGhostNet = null;
 		formPerson = new Person();
 
-		// salvagingFormVisible = false;
 		changeFormVisibility(FormVisibility.NONE);
 	}
 
 	// salvaged form
 
 	public void showSalvagedForm(GhostNet ghostNet) {
-		// salvagedFormVisible = true;
 		changeFormVisibility(FormVisibility.SALVAGED_FORM);
 		selectedGhostNet = ghostNet;
 	}
@@ -175,7 +170,6 @@ public class GhostNetController implements Serializable {
 			selectedGhostNet.setStatus(GhostNetStatus.SALVAGED);
 			ghostNetDAO.update(selectedGhostNet);
 			formPerson = new Person();
-			// salvagedFormVisible = false;
 			changeFormVisibility(FormVisibility.NONE);
 		} else {
 			FacesContext.getCurrentInstance().addMessage("salvagedFormMessages", new FacesMessage(
@@ -186,7 +180,6 @@ public class GhostNetController implements Serializable {
 	// lost form
 
 	public void showLostForm(GhostNet ghostNet) {
-		// lostFormVisible = true;
 		changeFormVisibility(FormVisibility.LOST_FORM);
 		selectedGhostNet = ghostNet;
 	}
@@ -198,7 +191,6 @@ public class GhostNetController implements Serializable {
 		selectedGhostNet = null;
 		formPerson = new Person();
 
-		// lostFormVisible = false;
 		changeFormVisibility(FormVisibility.NONE);
 	}
 }
