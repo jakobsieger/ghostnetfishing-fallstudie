@@ -27,11 +27,15 @@ public class GhostNetController implements Serializable {
 	private GhostNet newGhostNet = new GhostNet();
 	private Person formPerson = new Person();
 	private GhostNet selectedGhostNet;
-	
+
 	private boolean reportFormVisible = false;
 	private boolean salvagingFormVisible = false;
 	private boolean salvagedFormVisible = false;
 	private boolean lostFormVisible = false;
+
+	private enum FormVisibility {
+		REPORT_FORM, SALVAGING_FORM, SALVAGED_FORM, LOST_FORM, NONE
+	}
 
 	public GhostNetController() {
 		ghostNets = ghostNetDAO.findAll();
@@ -77,10 +81,40 @@ public class GhostNetController implements Serializable {
 		return lostFormVisible;
 	}
 
+	public void changeFormVisibility(FormVisibility visibility) {
+		if (visibility.equals(FormVisibility.REPORT_FORM)) {
+			reportFormVisible = true;
+			salvagingFormVisible = false;
+			salvagedFormVisible = false;
+			lostFormVisible = false;
+		} else if (visibility.equals(FormVisibility.SALVAGING_FORM)) {
+			reportFormVisible = false;
+			salvagingFormVisible = true;
+			salvagedFormVisible = false;
+			lostFormVisible = false;
+		} else if (visibility.equals(FormVisibility.SALVAGED_FORM)) {
+			reportFormVisible = false;
+			salvagingFormVisible = false;
+			salvagedFormVisible = true;
+			lostFormVisible = false;
+		} else if (visibility.equals(FormVisibility.LOST_FORM)) {
+			reportFormVisible = false;
+			salvagingFormVisible = false;
+			salvagedFormVisible = false;
+			lostFormVisible = true;
+		} else if (visibility.equals(FormVisibility.NONE)) {
+			reportFormVisible = false;
+			salvagingFormVisible = false;
+			salvagedFormVisible = false;
+			lostFormVisible = false;
+		}
+	}
+
 	// report form
 
 	public void showReportForm() {
-		reportFormVisible = true;
+		// reportFormVisible = true;
+		changeFormVisibility(FormVisibility.REPORT_FORM);
 	}
 
 	public void reportNewGhostNet() {
@@ -98,13 +132,15 @@ public class GhostNetController implements Serializable {
 
 		newGhostNet = new GhostNet();
 		formPerson = new Person();
-		reportFormVisible = false;
+		// reportFormVisible = false;
+		changeFormVisibility(FormVisibility.NONE);
 	}
 
 	// salvaging form
 
 	public void showSalvagingForm(GhostNet ghostNet) {
-		salvagingFormVisible = true;
+		// salvagingFormVisible = true;
+		changeFormVisibility(FormVisibility.SALVAGING_FORM);
 		selectedGhostNet = ghostNet;
 	}
 
@@ -119,13 +155,15 @@ public class GhostNetController implements Serializable {
 		selectedGhostNet = null;
 		formPerson = new Person();
 
-		salvagingFormVisible = false;
+		// salvagingFormVisible = false;
+		changeFormVisibility(FormVisibility.NONE);
 	}
 
 	// salvaged form
 
 	public void showSalvagedForm(GhostNet ghostNet) {
-		salvagedFormVisible = true;
+		// salvagedFormVisible = true;
+		changeFormVisibility(FormVisibility.SALVAGED_FORM);
 		selectedGhostNet = ghostNet;
 	}
 
@@ -137,7 +175,8 @@ public class GhostNetController implements Serializable {
 			selectedGhostNet.setStatus(GhostNetStatus.SALVAGED);
 			ghostNetDAO.update(selectedGhostNet);
 			formPerson = new Person();
-			salvagedFormVisible = false;
+			// salvagedFormVisible = false;
+			changeFormVisibility(FormVisibility.NONE);
 		} else {
 			FacesContext.getCurrentInstance().addMessage("salvagedFormMessages", new FacesMessage(
 					FacesMessage.SEVERITY_ERROR, "Personendaten müssen mit Anmeldung übereinstimmen", null));
@@ -147,7 +186,8 @@ public class GhostNetController implements Serializable {
 	// lost form
 
 	public void showLostForm(GhostNet ghostNet) {
-		lostFormVisible = true;
+		// lostFormVisible = true;
+		changeFormVisibility(FormVisibility.LOST_FORM);
 		selectedGhostNet = ghostNet;
 	}
 
@@ -158,6 +198,7 @@ public class GhostNetController implements Serializable {
 		selectedGhostNet = null;
 		formPerson = new Person();
 
-		lostFormVisible = false;
+		// lostFormVisible = false;
+		changeFormVisibility(FormVisibility.NONE);
 	}
 }

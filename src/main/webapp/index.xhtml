@@ -80,8 +80,9 @@
 			<h:commandButton value="Geisternetz speichern"
 				action="#{ghostNetController.reportNewGhostNet}" />
 		</h:form>
+		<br />
 	</h:panelGroup>
-	<br />
+
 	<h:panelGroup rendered="#{ghostNetController.salvagingFormVisible}">
 		<h:form>
 			<h:outputText
@@ -106,8 +107,9 @@
 			<h:commandButton value="Bergung speichern"
 				action="#{ghostNetController.registerSalvaging}" />
 		</h:form>
+		<br />
 	</h:panelGroup>
-	<br />
+
 	<h:panelGroup rendered="#{ghostNetController.salvagedFormVisible}">
 		<h:form>
 			<h:outputText
@@ -133,8 +135,9 @@
 				action="#{ghostNetController.reportAsSalvaged}" />
 			<h:messages id="salvagedFormMessages" style="color: red;" />
 		</h:form>
+		<br />
 	</h:panelGroup>
-	<br />
+
 	<h:panelGroup rendered="#{ghostNetController.lostFormVisible}">
 		<h:form>
 			<h:outputText
